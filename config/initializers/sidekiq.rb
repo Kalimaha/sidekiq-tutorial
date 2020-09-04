@@ -1,7 +1,7 @@
 Sidekiq.configure_server do |config|
-  config.redis = { url: "rediss://default:bwex4x57d720m2sq@vinomofo-redis-test-vinomofo-81f7.aivencloud.com:13193" }
+  config.redis = { url: "redis://redistogo:ea085b508bdf053c861d846d34032956@scat.redistogo.com:9588" }
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: "rediss://default:bwex4x57d720m2sq@vinomofo-redis-test-vinomofo-81f7.aivencloud.com:13193" }
+  config.redis = { url: "redis://redistogo:ea085b508bdf053c861d846d34032956@scat.redistogo.com:9588" }
 end
