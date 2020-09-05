@@ -1,6 +1,7 @@
 namespace :kafka do
   task :consume do
     require "kafka"
+    require "#{Rails.root}/app/workers/hard_worker"
 
     tmp_ca_file = Tempfile.new('ca_certs')
     tmp_ca_file.write(ENV.fetch('KAFKA_TRUSTED_CERT'))
@@ -21,7 +22,11 @@ namespace :kafka do
     kafka.each_message(topic: "#{ENV['KAFKA_PREFIX']}test_orders", max_wait_time: 0.5) do |message|
       begin
         puts "----------"
-        puts JSON.parse(message.value)
+        data = JSON.parse(message.value)
+        name = data["key"] || "NAME NOT FOUND"
+        count = data["value"]&.keys&.count || "COUNT NOT FOUND"
+        puts "Enqueue job for #{name}"
+        HardWorker.perform_async(name, count)
         puts "----------"
       rescue => e
         puts "Error parsing a message, #{e.message}"

@@ -8,8 +8,11 @@ namespace :kafka do
     topic = "#{ENV['KAFKA_PREFIX']}test_orders"
     puts "Prefix: #{ENV['KAFKA_PREFIX']}"
     puts " Topic: #{topic}"
+
+    message = order
+    puts "Sending #{message[:key]}"
     
-    kafka_client.deliver_message(order.to_json, topic: topic)
+    kafka_client.deliver_message(message.to_json, topic: topic)
   end
 end
 
