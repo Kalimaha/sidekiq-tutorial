@@ -7,6 +7,8 @@ gem 'rails', '~> 5.2.4', '>= 5.2.4.3'
 gem 'sidekiq'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'ruby-kafka'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
